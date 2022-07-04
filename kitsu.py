@@ -1,10 +1,12 @@
-import sys, os
+import sys, os, re
 import requests
 from bs4 import BeautifulSoup
-import re
 import difflib
 import urllib
 from urllib.parse import quote
+
+# *lowercase*, available: english, japanese, chinese, korean
+language = 'japanese'
 
 if sys.argv[1] == "" or None:
   print("No file playing")
@@ -19,7 +21,13 @@ def get_list(url):
         anime_list.append(anime.text.strip())
     return anime_list
 
-url = "https://kitsunekko.net/dirlist.php?dir=subtitles%2Fjapanese%2F"
+if language is 'english':
+    url  = 'https://kitsunekko.net/dirlist.php?dir=subtitles%2F'
+    url2 = 'https://kitsunekko.net/subtitles/'
+else:
+    url =  'https://kitsunekko.net/dirlist.php?dir=subtitles%2F%s%2F' % (language)
+    url2 = 'https://kitsunekko.net/subtitles/%s' % (language)
+
 anime_list = get_list(url)
 
 anime = sys.argv[1]
@@ -55,7 +63,7 @@ file_name = '.'.join(sys.argv[1].split('.')[:-1])
 full_path = '%s.%s' % (file_name, ext)
 print("Downloaded file: " + full_path)
 
-url = 'https://kitsunekko.net/subtitles/japanese/%s/%s' % (best_match, best_file)
+url = '%s/%s/%s' % (url2, best_match, best_file)
 urllib.request.urlretrieve(url, full_path)
 
 if full_path.endswith(compressed):
