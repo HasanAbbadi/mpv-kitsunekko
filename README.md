@@ -1,17 +1,14 @@
 # Kitsu
-A python file and an [mpv](https://mpv.io) script to download subtitles
-
+A python file and an [mpv](https://mpv.io) script to download subtitles \
 from [KitsuNekko](https://kitsunekko.net/) for current playing episode.
 
-
-By default it downloads Japanese subtitles, if you want to change that
-
+By default it downloads Japanese subtitles, if you want to change that \
 edit `kitsu.py` and change `language = 'japanese'` to your preferred language.
 
 ## Usage
 -----
-Press `Ctrl-k` while playing an episode to start the script.
-(you can change the keybinding from `main.lua` file)
+Press `Ctrl-k` while playing an episode to start the script. \
+(you can change the keybinding in `main.lua`)
 
 Or you can use the python file independently, as follows:
 ```bash
